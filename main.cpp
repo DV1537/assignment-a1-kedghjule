@@ -10,7 +10,7 @@
  */
 using namespace std;
 
-int* addToArray(int* array, int bufferSize, int value);
+double* addToArray(double* array, int bufferSize, double value);
 
 int main(int argc, const char * argv[])
 {
@@ -20,11 +20,11 @@ int main(int argc, const char * argv[])
 
 
     if(argc >= 2){ //Error handling
-        int a = 0;
-        int sum = 0;
+        double a = 0;
+        double sum = 0;
         double avg = 0;
         int bufferSize = 0;
-        int* buffer;
+        double* buffer;
 
         ifstream myReadFile;
 
@@ -33,6 +33,9 @@ int main(int argc, const char * argv[])
         if(myReadFile.is_open()){ //Error handling
             while (myReadFile >> a)
             {   
+                a = (int)(a * 1000 + .5); 
+                a = a / 1000;
+
                 buffer = addToArray(buffer, bufferSize, a);
                 bufferSize++;
 
@@ -41,7 +44,7 @@ int main(int argc, const char * argv[])
             myReadFile.close();
             
             if(!(bufferSize == 0 || sum == 0)){ //Error handling
-                avg = (double)sum / bufferSize;
+                avg = sum / (double)bufferSize;
 
                 for(int i = 0; i < bufferSize; i++){
                     if(buffer[i] > avg){
@@ -61,12 +64,12 @@ int main(int argc, const char * argv[])
     return 0;
 }
 
-int* addToArray(int* array, int bufferSize, int value){
+double* addToArray(double* array, int bufferSize, double value){
     if(array == nullptr){
         //If array is empty, create first slot and add the value
-        return new int[1] {value};
+        return new double[1] {value};
     }else{
-        int* buffer = new int[bufferSize + 1];
+        double* buffer = new double[bufferSize + 1];
         
         for(int i = 0; i < bufferSize; i++){
             buffer[i] = array[i];
