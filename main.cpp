@@ -36,7 +36,10 @@ int main(int argc, const char * argv[])
                 a = (int)(a * 1000 + .5); 
                 a = a / 1000;
 
-                buffer = addToArray(buffer, bufferSize, a);
+                double* tmp = addToArray(buffer, bufferSize, a);
+                buffer = nullptr;
+                buffer = tmp;
+
                 bufferSize++;
 
                 sum += a;
@@ -53,13 +56,13 @@ int main(int argc, const char * argv[])
                 }
 
             }else{ //The file contents contained a invalid format
-                cout << 0 << endl;
+                return EXIT_FAILURE;
             }
         }else{ //The file were not correctly read
-            cout << "File Error" << endl;
+            return EXIT_FAILURE;
         }
     }else{ //Not enough initial parameters
-        cout << "Error" << endl;
+        return EXIT_FAILURE;
     }
     return 0;
 }
@@ -76,8 +79,6 @@ double* addToArray(double* array, int bufferSize, double value){
         }
         buffer[bufferSize] = value;
         
-        //Array should probably be deleted
-
         return buffer;
     }
 }
