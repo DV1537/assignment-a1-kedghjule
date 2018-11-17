@@ -14,11 +14,6 @@ double* addToArray(double* array, int bufferSize, double value);
 
 int main(int argc, const char * argv[])
 {
-
-
-    //Program should be compatible with negative values
-
-
     if(argc >= 2){ //Error handling
         double a = 0;
         double sum = 0;
